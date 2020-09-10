@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+    <style>
+        form{
+            
+            margin-top: 20px;
+            font-size: larger;
+            border: 1px solid black;
+            display: inline-block;
+            padding: 20px;
+            background-color: whitesmoke;
+        }
+        input{
+            outline: none;
+        }
+        #form{
+            text-align: center;
+            background-color: rgb(183, 231, 229);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="form" >
+    <h1 style="padding-top: 10px;">Javascript Form Validation</h1>
+
+    <form action="#" method="POST" onsubmit="return validation();">
+        <label for="username">Username :</label>
+        <input id="username" type="text" name="Username" size="50" autocomplete="off"><br>
+        <span id="usernameError" style="color: red;"></span><br><br>
+        <label for="fullName">Full Name :</label>
+        <input id="fullName" type="text" name="Full Name" size="50" autocomplete="off"><br>
+        <span id="fullnameError" style="color: red;"></span><br><br>
+        <label for="email">Email id :</label>
+        <input id="email" type="email" name="Email id" size="50"><br>
+        <span id="emailError" style="color: red;"></span><br><br>
+        <label for="contact">Contact no. :</label>
+        <input id="contact" type="tel" name="Contact no." size="50" autocomplete="off"><br>
+        <span id="contactError" style="color: red;"></span><br><br>
+        <label for="Age">Age :</label>
+        <input id="Age" type="number" name="Age" size="50" autocomplete="off"><br>
+        <span id="ageError" style="color: red;"></span><br><br>
+        <input style="margin-top: 10px; width: 100px; height: 30px;" type="submit" value="Submit" >
+    </form>
+    </div>  
+    <script type="text/javascript">
+    function validation(){
+        var username = document.getElementById('username').value;
+        var name = document.getElementById('fullName').value;
+        var email = document.getElementById('email').value;
+        var contact = document.getElementById('contact').value;
+        var age = document.getElementById('Age').value;
+        
+        if(username.length < 3){
+            document.getElementById('usernameError').innerHTML = '**Username should be greater than 3 charecters';
+            return false;
+        }
+        else{
+            document.getElementById('usernameError').innerHTML = '';
+        }
+        
+        if(name.length < 3){
+            document.getElementById('fullnameError').innerHTML = '**Full name should be greater than 3 charecters';
+            return false;
+        }   
+        else{
+            document.getElementById('fullnameError').innerHTML = '';
+        }
+
+        if(email == ''){
+            document.getElementById('emailError').innerHTML = '**Please enter your email id';
+            return false;
+        }
+        else{
+            document.getElementById('emailError').innerHTML = '';
+        }
+        // if(email.indexOf('@') = 0){
+        //     document.getElementById('emailError').innerHTML = '**Please enter a valid email id';
+        //     return false;
+        // }
+        if(email.charAt(email.length - 4) != '.'){
+            document.getElementById('emailError').innerHTML = '**Please enter a valid email id';
+            return false;
+        }
+        else{
+            document.getElementById('emailError').innerHTML = '';
+        }
+
+        if(contact == ''){
+            document.getElementById('contactError').innerHTML = '**Please fill the contact entry';
+            return false;
+        }
+        else{
+            document.getElementById('contactError').innerHTML = '';
+        }
+        if(isNaN(contact)){
+            document.getElementById('contactError').innerHTML = '**Please only enter numeric digits';
+            return false;
+        }
+        else{
+            document.getElementById('contactError').innerHTML = '';
+        }
+        if(contact.length != 10){
+            document.getElementById('contactError').innerHTML = '**Please enter a 10 digit number';
+            return false;
+        }
+        else{
+            document.getElementById('contactError').innerHTML = '';
+        }
+
+        if(age == ''){
+            document.getElementById('ageError').innerHTML = '**Please enter your age';
+            return false;
+        }
+        else{
+            document.getElementById('ageError').innerHTML = '';
+        }
+        if(age>90 || age<19){
+            document.getElementById('ageError').innerHTML = '**Age should be between 19 to 90';
+            return false;
+        }
+        else{
+            document.getElementById('ageError').innerHTML = '';
+        }
+      
+    }
+
+    var username = document.getElementById('username');
+    var fullname = document.getElementById('fullName');
+    var email = document.getElementById('email');
+    var contact = document.getElementById('contact');
+    var age = document.getElementById('Age');
+
+    username.addEventListener('input' , validateUsername);
+    fullname.addEventListener('input' , validateFullname);
+    email.addEventListener('input' , validateEmail);
+    contact.addEventListener('input' , validateContact);
+    age.addEventListener('input' , validateAge);
+
+    function validateUsername(){ //Dynamic validation for Username
+        var username = document.getElementById('username').value;
+        if(username.length < 3){
+            document.getElementById('usernameError').innerHTML = '**Username should be greater than 3 charecters';
+            document.getElementById('username').style.border = '1px solid #FF0000';
+            return false;
+        }
+        else{
+            document.getElementById('usernameError').innerHTML = '';
+            document.getElementById('username').style.border = '1px solid #44E444';
+        }
+    }
+
+    function validateFullname(){ //validation for full name
+        var name = document.getElementById('fullName').value;
+        if(name.length < 3){
+            document.getElementById('fullnameError').innerHTML = '**Full name should be greater than 3 charecters';
+            document.getElementById('fullName').style.border = '1px solid #FF0000';
+            return false;
+        }   
+        else{
+            document.getElementById('fullnameError').innerHTML = '';
+            document.getElementById('fullName').style.border = '1px solid #44E444';
+        }
+    }
+
+    function validateEmail(){ //validation for email
+        var email = document.getElementById('email').value;
+        if(email == ''){
+            document.getElementById('emailError').innerHTML = '**Please enter your email id';
+            document.getElementById('email').style.border = '1px solid #FF0000';
+            return false;
+        }
+        else{
+            document.getElementById('emailError').innerHTML = '';
+            document.getElementById('email').style.border = '1px solid #44E444';
+        }
+        if(email.charAt(email.length - 4) != '.'){
+            document.getElementById('emailError').innerHTML = '**Please enter a valid email id';
+            document.getElementById('email').style.border = '1px solid #FF0000';
+            return false;
+        }
+        else{
+            document.getElementById('emailError').innerHTML = '';
+            document.getElementById('email').style.border = '1px solid #44E444';
+        }
+    }
+
+    function validateContact() { //validation for contact
+        var contact = document.getElementById('contact').value;
+        if(contact == ''){
+            document.getElementById('contactError').innerHTML = '**Please fill the contact entry';
+            document.getElementById('contact').style.border = '1px solid #FF0000';
+            return false;
+        }
+        else{
+            document.getElementById('contactError').innerHTML = '';
+            document.getElementById('contact').style.border = '1px solid #44E444';
+        }
+        if(isNaN(contact)){
+            document.getElementById('contactError').innerHTML = '**Please only enter numeric digits';
+            document.getElementById('contact').style.border = '1px solid #FF0000';
+            return false;
+        }
+        else{
+            document.getElementById('contactError').innerHTML = '';
+            document.getElementById('contact').style.border = '1px solid #44E444';
+        }
+        if(contact.length != 10){
+            document.getElementById('contactError').innerHTML = '**Please enter a 10 digit number';
+            document.getElementById('contact').style.border = '1px solid #FF0000';
+            return false;
+        }
+        else{
+            document.getElementById('contactError').innerHTML = '';
+            document.getElementById('contact').style.border = '1px solid #44E444';
+        }
+
+    }    
+
+    function validateAge() { //validation for age
+        var age = document.getElementById('Age').value;
+        if(age == ''){
+            document.getElementById('ageError').innerHTML = '**Please enter your age';
+            document.getElementById('Age').style.border = '1px solid #FF0000';
+            return false;
+        }
+        else{
+            document.getElementById('ageError').innerHTML = '';
+            document.getElementById('Age').style.border = '1px solid #44E444';
+        }
+        if(age>90 || age<19){
+            document.getElementById('ageError').innerHTML = '**Age should be between 19 to 90';
+            document.getElementById('Age').style.border = '1px solid #FF0000';
+            return false;
+        }
+        else{
+            document.getElementById('ageError').innerHTML = '';
+            document.getElementById('Age').style.border = '1px solid #44E444';
+        }
+    }
+
+    </script>
+</body>
+</html>
